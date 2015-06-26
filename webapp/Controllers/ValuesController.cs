@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
+using System.Web.Routing;
+using Newtonsoft.Json;
 
 namespace webapp.Controllers
 {
@@ -34,6 +38,22 @@ namespace webapp.Controllers
         // DELETE api/values/5
         public void Delete(int id)
         {
+        }
+
+        [HttpGet]
+        public object Test()
+        {
+            //var directories = Directory.EnumerateDirectories(HttpRuntime.AppDomainAppPath).ToList();
+            var files = Directory.EnumerateFiles(HttpRuntime.AppDomainAppPath).ToList();
+
+            var webConfig = files.FirstOrDefault(x => x.ToLower().Contains("web.config"));
+
+            if (webConfig != null)
+            {
+
+            }
+
+            return files;
         }
     }
 }
